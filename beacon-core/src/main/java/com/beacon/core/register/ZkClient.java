@@ -11,7 +11,7 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
  */
 public class ZkClient {
 
-    private static final String NAME_SPACE = "";
+    private static final String NAME_SPACE = "beacon";
 
     CuratorFramework curatorFramework = CuratorFrameworkFactory.builder()
             .connectString("")
