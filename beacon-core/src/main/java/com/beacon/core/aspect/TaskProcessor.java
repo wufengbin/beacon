@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.beacon.client.Task;
 import com.beacon.client.TaskInfo;
 import com.beacon.client.TaskInfoBuilder;
+import com.beacon.core.register.ZkClient;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
@@ -19,6 +21,9 @@ import java.lang.reflect.Method;
  */
 @Component
 public class TaskProcessor implements BeanPostProcessor {
+
+    @Autowired
+    private ZkClient zkClient;
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -39,6 +44,7 @@ public class TaskProcessor implements BeanPostProcessor {
                 String methodName = method.getName();
                 String corn = task.value();
                 TaskInfo taskInfo = TaskInfoBuilder.builder().clazz(className).method(methodName).corn(corn).build();
+                zkClient.create("beacon", JSON.toJSONString(taskInfo));
                 System.out.println(JSON.toJSON(taskInfo));
             }
         }
