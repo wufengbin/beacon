@@ -26,7 +26,7 @@ public class TaskProcessor implements BeanPostProcessor {
     private ZkClient zkClient;
 
     // @Value("${beacon.nameSpace}")
-    private String nameSpace = "/beacon";
+    private String nameSpace = "/beacon/";
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -40,13 +40,13 @@ public class TaskProcessor implements BeanPostProcessor {
         for (Method method : methods) {
             Task task = AnnotationUtils.findAnnotation(method, Task.class);
             if (task == null) {
-                return bean;
+                continue;
             }
             String className = method.getDeclaringClass().getName();
             String methodName = method.getName();
             String corn = task.value();
             TaskInfo taskInfo = TaskInfoBuilder.builder().clazz(className).method(methodName).corn(corn).build();
-            zkClient.create(nameSpace, JSON.toJSONString(taskInfo));
+            zkClient.create(nameSpace + methodName, JSON.toJSONString(JSON.toJSONString(taskInfo)));
         }
         return bean;
     }

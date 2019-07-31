@@ -25,6 +25,7 @@
     </properties>
 
     <modules>
+        <module>beacon-server</module>
         <module>beacon-core</module>
         <module>beacon-client</module>
     </modules>
