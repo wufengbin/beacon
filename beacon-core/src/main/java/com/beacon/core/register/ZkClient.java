@@ -20,12 +20,11 @@ public class ZkClient {
 
     private static final Logger logger = LoggerFactory.getLogger(ZkClient.class);
 
-    private static final String NAME_SPACE = "beacon";
-
     private static final String ZOOKEEPER_ADDRESS = "127.0.0.1:2181";
 
     private static RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 10);
-    private static CuratorFramework cf = null;
+
+    private static CuratorFramework cf;
 
     static {
         cf = CuratorFrameworkFactory.builder()
@@ -49,5 +48,6 @@ public class ZkClient {
             throw new CuratorException(e);
         }
     }
+
 
 }
