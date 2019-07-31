@@ -18,4 +18,8 @@ public class OrderTask {
         System.out.println("syncOrder execute ...");
     }
 
+    @Task("* * 1 * * ?")
+    public void syncUserInfo() {
+        System.out.println("syncUserInfo execute ...");
+    }
 }

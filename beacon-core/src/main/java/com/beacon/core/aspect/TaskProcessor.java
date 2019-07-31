@@ -7,7 +7,6 @@ import com.beacon.client.TaskInfoBuilder;
 import com.beacon.core.register.ZkClient;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
@@ -26,8 +25,8 @@ public class TaskProcessor implements BeanPostProcessor {
     @Autowired
     private ZkClient zkClient;
 
-    @Value("${beacon.nameSpace}")
-    private String nameSpace;
+    // @Value("${beacon.nameSpace}")
+    private String nameSpace = "/beacon";
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
