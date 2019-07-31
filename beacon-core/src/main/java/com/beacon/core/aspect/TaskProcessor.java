@@ -44,7 +44,7 @@ public class TaskProcessor implements BeanPostProcessor {
                 String methodName = method.getName();
                 String corn = task.value();
                 TaskInfo taskInfo = TaskInfoBuilder.builder().clazz(className).method(methodName).corn(corn).build();
-                zkClient.create("beacon", JSON.toJSONString(taskInfo));
+                zkClient.create("/beacon", JSON.toJSONString(taskInfo));
                 System.out.println(JSON.toJSON(taskInfo));
             }
         }

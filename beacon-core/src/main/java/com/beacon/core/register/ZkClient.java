@@ -1,5 +1,6 @@
 package com.beacon.core.register;
 
+import com.beacon.core.exception.CuratorException;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -21,7 +22,7 @@ public class ZkClient {
 
     private static final String NAME_SPACE = "beacon";
 
-    private static final String ZOOKEEPER_ADDRESS = "http://62.49.197.225:2181";
+    private static final String ZOOKEEPER_ADDRESS = "127.0.0.1:2181";
 
     private static RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 10);
     private static CuratorFramework cf = null;
@@ -37,22 +38,16 @@ public class ZkClient {
     }
 
 
-    public boolean create(String path, String data) {
+    public void create(String path, String data) {
         try {
             cf.create()
                     .creatingParentContainersIfNeeded()
                     .withMode(CreateMode.PERSISTENT)
                     .forPath(path, data.getBytes());
         } catch (Exception e) {
-            logger.error("create node error,path:{},data:{}", path, data);
-            return false;
+            logger.error("create node error,path:{},data:{}", path, data, e);
+            throw new CuratorException(e);
         }
-        return true;
     }
-
-    public String listen() {
-        return "";
-    }
-
 
 }
