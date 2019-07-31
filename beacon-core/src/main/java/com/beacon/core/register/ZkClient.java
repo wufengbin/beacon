@@ -8,14 +8,12 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.zookeeper.CreateMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 /**
  * @author fengbin2.wu
  * @date 2019-07-24 14:49
  * version 1.0
  */
-@Component
 public class ZkClient {
 
     private static final Logger logger = LoggerFactory.getLogger(ZkClient.class);
