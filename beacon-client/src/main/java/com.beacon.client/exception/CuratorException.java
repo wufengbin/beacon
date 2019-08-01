@@ -1,4 +1,4 @@
-package com.beacon.core.exception;
+package com.beacon.client.exception;
 
 /**
  * @author fengbin2.wu
