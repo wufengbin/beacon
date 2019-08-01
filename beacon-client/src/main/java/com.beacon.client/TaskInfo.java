@@ -7,10 +7,18 @@ package com.beacon.client;
  */
 public class TaskInfo {
 
+    private String address;
     private String clazz;
     private String method;
     private String corn;
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public String getClazz() {
         return clazz;
@@ -35,4 +43,17 @@ public class TaskInfo {
     public void setCorn(String corn) {
         this.corn = corn;
     }
+
+    @Override
+    public String toString() {
+        return "{\"address\":" + "\"" + address + "\"," + "\"clazz\":" + "\"" + clazz + "\","
+                + "\"method\":" + "\"" + method + "\","
+                + "\"corn\":" + "\"" + corn + "\"" + "}";
+    }
+
+    public static void main(String[] args) {
+        System.out.println(TaskInfoBuilder.builder().address("address").clazz("clazz").method("method").corn("corn")
+                .build().toString());
+    }
+
 }

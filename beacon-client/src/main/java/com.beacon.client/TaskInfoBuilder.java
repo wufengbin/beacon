@@ -17,6 +17,11 @@ public class TaskInfoBuilder {
         return new TaskInfoBuilder();
     }
 
+    public TaskInfoBuilder address(String address) {
+        this.taskInfo.setAddress(address);
+        return this;
+    }
+
     public TaskInfoBuilder clazz(String clazz) {
         this.taskInfo.setClazz(clazz);
         return this;

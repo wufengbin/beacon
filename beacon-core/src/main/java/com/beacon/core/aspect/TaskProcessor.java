@@ -1,6 +1,5 @@
 package com.beacon.core.aspect;
 
-import com.alibaba.fastjson.JSON;
 import com.beacon.client.Task;
 import com.beacon.client.TaskInfo;
 import com.beacon.client.TaskInfoBuilder;
@@ -46,7 +45,7 @@ public class TaskProcessor implements BeanPostProcessor {
             String methodName = method.getName();
             String corn = task.value();
             TaskInfo taskInfo = TaskInfoBuilder.builder().clazz(className).method(methodName).corn(corn).build();
-            zkClient.create(nameSpace + methodName, JSON.toJSONString(JSON.toJSONString(taskInfo)));
+            zkClient.create(nameSpace + methodName, taskInfo.toString());
         }
         return bean;
     }
